@@ -16,6 +16,7 @@ function App() {
                     <Route path="/generate" element={<GenerationForm mainQuery={mainQuery} setMainQuery={setMainQuery} />} />
                     <Route path="/" element={<AvatarChat />} />
                     <Route path="/:id" element={<AvatarChat />} />
+                    <Route path="/:id/:uid" element={<AvatarChat />} />
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
 

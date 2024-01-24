@@ -20,6 +20,7 @@
     "react-router-dom": "^6.21.2",
     "redux": "^5.0.1",
     "tailwindcss": "^3.4.1",
+    "vercel": "^33.2.0",
     "video-react": "^0.16.0"
   },
   "devDependencies": {
