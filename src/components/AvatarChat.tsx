@@ -37,8 +37,9 @@ function AvatarChat () {
   )
 
   const handleEmailSubmission = () => {
-      postToAPI("generateInfo/", {"email": email,"insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }]}).then(() => {
-              setQuestion("Please find the link to your survey in mail!")
+      postToAPI("generateInfo/", {"email": email,"insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }]}).then((data) => {
+              console.log(`email: ${data}`)
+              setQuestion(`Please find the link to your survey here: ${data}!`)
               setShowMail(false)
           })
       }
