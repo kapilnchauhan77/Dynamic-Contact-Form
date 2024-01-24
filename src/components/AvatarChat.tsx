@@ -191,7 +191,7 @@ function AvatarChat() {
                                     </button>
                                 </div></>) :
 
-                            (showGen) && (showMail) ? (
+                            (showGen) && ((showMail) ? (
                             <div>
                                 <div>
                                     <label htmlFor="text_mail" className="block text-sm font-semibold leading-6 text-gray-900">
@@ -231,12 +231,12 @@ function AvatarChat() {
                                         className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                         onClick={handleGenInfo}
                                     >
-                                        Try your generated Conversational Survey!
+                                        Try AI generated Conversational Survey!
                                     </button>
                                 </div>
                             </div>
                             )
-                        )}
+                        ))}
 
 
                     </div>
