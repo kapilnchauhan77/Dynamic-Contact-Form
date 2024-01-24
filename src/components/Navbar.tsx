@@ -13,7 +13,7 @@ function Navbar() {
                       <Link to='/'>
                       <img
                         className="h-16"
-                        src={"./XPBrand.svg"}
+                        src={"/XPBrand.svg"}
                         alt="XPBrand.ai"
                       />
                       </Link>

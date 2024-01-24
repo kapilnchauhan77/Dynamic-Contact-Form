@@ -72,7 +72,7 @@ function AvatarChat() {
 
     const handleGenInfo = () => {
         setLoading(true)
-        postToAPI("generateInfo/", { "insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }] }).then((data: string) => {
+        postToAPI("generateInfo/", { "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }] }).then((data: string) => {
             console.log(`url: ${data}`)
             setShowMail(false)
             nav(data.substr(data.lastIndexOf('/')))
@@ -106,7 +106,7 @@ function AvatarChat() {
         if (chatEnabled) {
             setLoading(true)
             if (id) {
-                postToAPI("uid/", { "id": id, "insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
+                postToAPI("uid/", { "id": id, "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
@@ -120,11 +120,11 @@ function AvatarChat() {
                         setQuestion(data[1])
                         setAnswer("")
                     }
-                    setInsightsKPI(prevData => [...prevData, { "question": question, "answer": answer }]);
+                    setInsightsKPI(prevData => [...prevData, {"index": insightsKPI.length, "question": question, "answer": answer }]);
                     setLoading(false)
                 })
             } else {
-                postToAPI("chat/", { "insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question, "generation_flow": true }).then(data => {
+                postToAPI("chat/", { "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question, "generation_flow": true }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
@@ -135,7 +135,7 @@ function AvatarChat() {
                         setQuestion(data[1])
                         setAnswer("")
                     }
-                    setInsightsKPI(prevData => [...prevData, { "question": question, "answer": answer }]);
+                    setInsightsKPI(prevData => [...prevData, {"index": insightsKPI.length, "question": question, "answer": answer }]);
                     setLoading(false)
                 })
             }
@@ -155,7 +155,7 @@ function AvatarChat() {
                 <div className="sm:mx-auto w-full">
 
                     <div className="flex w-full align-center justify-center">
-                        <img className="pt-12 mt-10" src={"./img.jpg"} width={"25%"} />
+                        <img className="pt-12 mt-10" src={"/img.jpg"} width={"25%"} />
                     </div>
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         {question}
