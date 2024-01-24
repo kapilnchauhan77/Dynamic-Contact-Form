@@ -40,8 +40,10 @@ function AvatarChat () {
   )
 
   const handleEmailSubmission = () => {
+      setLoading(true)
       postToAPI("generateInfo/", {"email": email,"insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }]}).then((data) => {
               console.log(`email: ${data}`)
+              setLoading(false)
               setQuestion("Please find the link to your survey here in your mail!")
               setShowMail(false)
           })
@@ -131,7 +133,7 @@ function AvatarChat () {
               </button>
             </div></>):
 
-                (showMail) && (<div>
+                (showMail) && ( loading ? loadingComponent : <div>
                             
                             <div>
                                 <label htmlFor="text_mail" className="block text-sm font-semibold leading-6 text-gray-900">
