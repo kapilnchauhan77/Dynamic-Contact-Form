@@ -17,11 +17,13 @@ function AvatarChat () {
 
   useEffect(()=>{
       if (id){
+          setLoading(true)
           postToAPI("first_question/", {"id": id}).then((data)=>{
                   console.log("First Question")
                   console.log(data)
                   setQuestion(data)
                   setShowMail(false)
+                  setLoading(false)
               })
           }
       }, [])
