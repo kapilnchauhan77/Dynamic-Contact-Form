@@ -18,6 +18,7 @@ function AvatarChat () {
   useEffect(()=>{
       if (id){
           setLoading(true)
+          setQuestion('')
           postToAPI("first_question/", {"id": id}).then((data)=>{
                   console.log("First Question")
                   console.log(data)
