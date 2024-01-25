@@ -72,6 +72,7 @@ function AvatarChat() {
 
     const handleGenInfo = () => {
         setLoading(true)
+        setQuestion("Generating conversational survey")
         postToAPI("generateInfo/", { "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }] }).then((data: string) => {
             console.log(`url: ${data}`)
             setShowMail(false)
@@ -106,7 +107,7 @@ function AvatarChat() {
         if (chatEnabled) {
             setLoading(true)
             if (id) {
-                postToAPI("uid/", { "id": id, "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
+                postToAPI("uid/", { "id": id, "uid": uid, "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
@@ -130,7 +131,7 @@ function AvatarChat() {
                     if (insightsKPI.length > 3) {
                         // postToAPI("generateInfo/", {"insights_KPIs": [...insightsKPI, { "question": question, "answer": answer }]})
                         setChatEnabled(false);
-                        setQuestion("Your conversational AI based survey is ready!")
+                        setQuestion("Thanks for answering the questions! We now have enough data to generate your conversational survey")
                     } else {
                         setQuestion(data[1])
                         setAnswer("")
