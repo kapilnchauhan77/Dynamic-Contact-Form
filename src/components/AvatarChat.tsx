@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { postToAPI } from "./utils/postToAPI.ts";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 
 function AvatarChat() {
     let { id, uid } = useParams();
+    const search = useLocation().search;
+    const next_question =  new URLSearchParams(search).get('next_question');
+    const sid =  new URLSearchParams(search).get('sid');
+    const uuid =  new URLSearchParams(search).get('uuid');
     const startPrompt: string = (id) ? "Please provide quick feedback or comments" : "What industry is your intended Market Research (MR) Survey geared towards?"
     const [answer, setAnswer] = useState<string | undefined>("");
     const [email, setEmail] = useState<string | undefined>("");
@@ -27,8 +31,18 @@ function AvatarChat() {
             setQuestion('')
             setAnswer('')
             console.log(id)
-            postToAPI("first_question/", { "id": id }).then((data) => {
+            postToAPI("first_question/", { "id": id, "next_question": next_question }).then((data) => {
                 console.log("First Question")
+                console.log('id')
+                console.log(id)
+                console.log('uid')
+                console.log(uid)
+                console.log('sid')
+                console.log(sid)
+                console.log('next_question')
+                console.log(next_question)
+                console.log('uuid')
+                console.log(uuid)
                 console.log(data)
                 setIndustry(data[0])
                 setTargetAudience(data[1])
@@ -107,7 +121,7 @@ function AvatarChat() {
         if (chatEnabled) {
             setLoading(true)
             if (id) {
-                postToAPI("uid/", { "id": id, "uid": uid, "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
+                postToAPI("uid/", { "id": id, "uid": uid, "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
