@@ -8,6 +8,7 @@ function AvatarChat() {
     const search = useLocation().search;
     const next_question =  new URLSearchParams(search).get('next_question');
     const sid =  new URLSearchParams(search).get('sid');
+    const domain =  new URLSearchParams(search).get('domain');
     const uuid =  new URLSearchParams(search).get('uuid');
     const startPrompt: string = (id) ? "Please provide quick feedback or comments" : "What industry is your intended Market Research (MR) Survey geared towards?"
     const [answer, setAnswer] = useState<string | undefined>("");
@@ -78,6 +79,9 @@ function AvatarChat() {
             console.log(data)
             setLoading(false)
             setQuestion("Please find the link to your survey here in your mail!")
+            if (domain) {
+                window.location.replace(`${domain}/survey/${sid}/${uuid}`);
+                }
             setShowMail(false)
             setShowGen(false)
             setChatEnabled(false)
@@ -95,7 +99,7 @@ function AvatarChat() {
             setLoading(true)
             setQuestion('')
             setAnswer('')
-            postToAPI("first_question/", { "id": id }).then((data) => {
+            postToAPI("first_question/", { "id": id , "next_question": next_question }).then((data) => {
                 console.log("First Question")
                 console.log(data)
                 setIndustry(data[0])
@@ -121,7 +125,7 @@ function AvatarChat() {
         if (chatEnabled) {
             setLoading(true)
             if (id) {
-                postToAPI("uid/", { "id": id, "uid": uid, "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
+                postToAPI("uid/", { "id": id, "uid": uid, "next_question": next_question , "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
@@ -129,6 +133,9 @@ function AvatarChat() {
                         if (uid){
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
                         } else {
+                            if (domain) {
+                                window.location.replace(`${domain}/survey/${sid}/${uuid}`);
+                                }
                             setQuestion("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") 
                                 }
                     } else {
@@ -139,7 +146,7 @@ function AvatarChat() {
                     setLoading(false)
                 })
             } else {
-                postToAPI("chat/", { "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question, "generation_flow": true }).then(data => {
+                postToAPI("chat/", { "next_question": next_question, "insights_KPIs": [...insightsKPI, {"index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question, "generation_flow": true }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
