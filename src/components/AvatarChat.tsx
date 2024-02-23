@@ -125,7 +125,7 @@ function AvatarChat() {
         if (chatEnabled) {
             setLoading(true)
             if (id) {
-                postToAPI("uid/", { "id": id, "uid": uid, "next_question": next_question , "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
+                postToAPI("uid/", {"uuid": uuid, "id": id, "uid": uid, "next_question": next_question , "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 3) {
