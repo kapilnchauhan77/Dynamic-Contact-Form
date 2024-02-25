@@ -7,7 +7,7 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div className="min-h-full">
+            <div className="min-h-full overflow-hidden">
 
                 <Navbar />
 

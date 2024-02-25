@@ -173,13 +173,12 @@ function AvatarChat() {
 
     return (
         <>
-            <div className="flex min-h-full flex-1 flex-col justify-content-center align-center px-6 lg:px-8">
+            <div className="flex min-h-full flex-1 flex-col justify-content-center align-center overflow-hidden">
                 <div className="sm:mx-auto w-full">
 
-                    <div className="flex w-full align-center justify-center">
-                        <img className="pt-12 mt-10" src={"/img.jpg"} width={"100%"} />
-                    </div>
-                    <div className="absolute top-1/2 px-20 bg-white/70 opacity-70">
+                    <div className="flex w-full align-center justify-center overflow-hidden">
+                        <img  src={"/img.jpg"} width={"100%"} className="overflow-hidden" />
+                    <div className="absolute top-1/2 left-1/4 px-20 bg-white/70">
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         {question}
                     </h2>
@@ -260,6 +259,7 @@ function AvatarChat() {
                             </div>
                             )
                         ))}
+                    </div>
                         </div>
 
 
