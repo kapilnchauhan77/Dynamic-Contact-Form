@@ -177,8 +177,9 @@ function AvatarChat() {
                 <div className="sm:mx-auto w-full">
 
                     <div className="flex w-full align-center justify-center">
-                        <img className="pt-12 mt-10" src={"/img.jpg"} width={"25%"} />
+                        <img className="pt-12 mt-10" src={"/img.jpg"} width={"100%"} />
                     </div>
+                    <div className="absolute top-1/2 px-20 bg-white/70 opacity-70">
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         {question}
                     </h2>
@@ -259,6 +260,7 @@ function AvatarChat() {
                             </div>
                             )
                         ))}
+                        </div>
 
 
                     </div>
