@@ -178,7 +178,7 @@ function AvatarChat() {
 
                     <div className="flex w-full align-center justify-center overflow-hidden">
                         <img  src={"/img.jpg"} width={"100%"} className="overflow-hidden" />
-                    <div className="absolute top-1/2 left-1/4 px-20 bg-white/70">
+                    <div className="absolute top-1/2 px-20 bg-white/70">
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         {question}
                     </h2>
