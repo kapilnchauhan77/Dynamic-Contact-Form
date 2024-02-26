@@ -57,7 +57,7 @@ function AvatarChat() {
                     }
                 else {
                     setShowGen(true)
-                    // setShowMail(true)
+                    setShowMail(true)
                     }
             })
         }
@@ -77,11 +77,13 @@ function AvatarChat() {
         setLoading(true)
         postToAPI("mail/", {"email": email, "uuid": id, "industry": industry, "target_audience": targetAudience, "survey_goal": surveyGoal}).then((data) => {
             console.log(data)
-            setLoading(false)
-            setQuestion("Please find the link to your survey here in your mail!")
             if (domain) {
                 window.location.replace(`${domain}/survey/${sid}/${uuid}`);
                 }
+                else{
+                setLoading(false)
+                setQuestion("Please find the link to your survey here in your mail!")
+                    }
             setShowMail(false)
             setShowGen(false)
             setChatEnabled(false)
