@@ -144,7 +144,7 @@ function AvatarChat() {
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
                         } else {
                             if (domain) {
-                                window.location.replace(`${domain}/survey/${sid}/${uuid}`);
+                                window.location.replace(domain);
                                 }
                             setQuestion("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") 
                                 }
