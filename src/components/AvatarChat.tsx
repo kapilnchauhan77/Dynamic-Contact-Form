@@ -7,9 +7,17 @@ function AvatarChat() {
     let { id, uid } = useParams();
     const search = useLocation().search;
     const next_question =  new URLSearchParams(search).get('next_question');
-    const sid =  new URLSearchParams(search).get('sid');
-    const domain =  new URLSearchParams(search).get('domain');
     const uuid =  new URLSearchParams(search).get('uuid');
+    const sid =  new URLSearchParams(search).get('sid');
+    const state =  new URLSearchParams(search).get('state');
+    let domain: string|null;
+    if (state?.length != 0){
+        domain = `https://release.decipherinc.com/survey/selfserve/ac8/240300?state=%5b${state}%5d`
+        }
+    else{
+        domain =  new URLSearchParams(search).get('domain');
+        domain = `${domain}/survey/${sid}/${uuid}`
+    }
     const startPrompt: string = (id) ? "Please provide quick feedback or comments" : "What industry is your intended Market Research (MR) Survey geared towards?"
     const [answer, setAnswer] = useState<string | undefined>("");
     const [email, setEmail] = useState<string | undefined>("");
