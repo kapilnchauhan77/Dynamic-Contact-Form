@@ -12,7 +12,7 @@ function AvatarChat() {
     const state =  new URLSearchParams(search).get('state');
     let domain: string|null;
     if (state?.length != 0){
-        domain = `https://release.decipherinc.com/survey/selfserve/ac8/240300?state=%5b${state}%5d`
+        domain = `https://release.decipherinc.com/survey/selfserve/ac8/240300?state=${state}`
         }
     else{
         domain =  new URLSearchParams(search).get('domain');
@@ -86,7 +86,7 @@ function AvatarChat() {
         postToAPI("mail/", {"email": email, "uuid": id, "industry": industry, "target_audience": targetAudience, "survey_goal": surveyGoal}).then((data) => {
             console.log(data)
             if (domain) {
-                window.location.replace(`${domain}/survey/${sid}/${uuid}`);
+                window.location.replace(domain);
                 }
                 else{
                 setLoading(false)
