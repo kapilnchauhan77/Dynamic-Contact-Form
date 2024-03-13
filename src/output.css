@@ -1388,6 +1388,10 @@ select {
   top: 1rem;
 }
 
+.top-\[20\%\] {
+  top: 20%;
+}
+
 .isolate {
   isolation: isolate;
 }
