@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Navbar, Hero, Footer, GenerationForm, AvatarChat, Contact } from './components'
+import { Navbar, Hero, GenerationForm, AvatarChat, Contact } from './components'
 import { useState } from "react";
 
 function App() {
@@ -20,7 +20,6 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                 </Routes>
 
-                <Footer />
 
             </div>
         </BrowserRouter>
