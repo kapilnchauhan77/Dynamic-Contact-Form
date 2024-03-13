@@ -7,12 +7,14 @@ function AvatarChat() {
     let { id, uid } = useParams();
     const search = useLocation().search;
     const next_question =  new URLSearchParams(search).get('next_question');
-    const uuid =  new URLSearchParams(search).get('uuid');
-    const sid =  new URLSearchParams(search).get('sid');
-    const state =  new URLSearchParams(search).get('state');
+    const forsta_uuid : string|null=  new URLSearchParams(search).get('fs_uuid');
+    const forsta_sid : string|null=  new URLSearchParams(search).get('fs_surveyid');
+    const uuid =  (forsta_uuid != null && forsta_uuid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('uuid');
+    const sid =  (forsta_sid != null && forsta_sid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('sid');
+    const state =  new URLSearchParams(search).get('return-url');
     let domain: string|null;
     if (state?.length != 0){
-        domain = `https://release.decipherinc.com/survey/selfserve/ac8/240300?state=${state}`
+        domain = state;
         }
     else{
         domain =  new URLSearchParams(search).get('domain');
@@ -187,90 +189,90 @@ function AvatarChat() {
                 <div className="sm:mx-auto w-full">
 
                     <div className="flex w-full align-center justify-center overflow-hidden">
-                        <img  src={"/img.jpg"} width={"100%"} className="overflow-hidden" />
-                    <div className="absolute top-1/2 px-20 bg-white/70">
-                    <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-                        {question}
-                    </h2>
+                        {(state == null || state?.length == 0) && (<img  src={"/img.jpg"} width={"100%"} className="overflow-hidden" />)}
+                        <div className="absolute top-1/2 px-20 bg-white/70">
+                        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+                            {question}
+                        </h2>
 
-                    <div className="mt-5 mx-auto w-full max-w-5xl justify-center">
+                        <div className="mt-5 mx-auto w-full max-w-5xl justify-center">
 
-                        {loading ? loadingComponent : 
-                        (chatEnabled ?
-                            (<><div>
-                                <div className="mt-2">
-                                    <textarea
-                                        rows={5}
-                                        id="answer"
-                                        name="answer"
-                                        required
-                                        className="resize-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                        value={answer}
-                                        onChange={(e: React.ChangeEvent<any>) => setAnswer(e.target.value)}
-                                        onKeyDown={handleKeyDown}
-                                    />
-                                </div>
-                            </div>
-
-
-                                <div className="relative py-4 justify-self-end pb-24">
-                                    <button
-                                        type="submit"
-                                        className="w-28 absolute right-0 justify-self-end rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={handleSubmit}
-                                    >
-                                        Submit
-                                    </button>
-                                </div></>) :
-
-                            (showGen) && ((showMail) ? (
-                            <div>
-                                <div>
-                                    <label htmlFor="text_mail" className="block text-sm font-semibold leading-6 text-gray-900">
-                                        Email
-                                    </label>
-                                    <div className="mt-2.5">
-                                        <input
-                                            type="text"
-                                            name="text_mail"
-                                            id="text_mail"
+                            {loading ? loadingComponent : 
+                            (chatEnabled ?
+                                (<><div>
+                                    <div className="mt-2">
+                                        <textarea
+                                            rows={5}
+                                            id="answer"
+                                            name="answer"
                                             required
-                                            autoComplete="email"
-                                            className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                            value={email}
-                                            onChange={(e: React.ChangeEvent<any>) => setEmail(e.target.value)}
-                                            onKeyDown={(e) => ((e.key === "Enter") && handleEmailSubmission())}
+                                            className="resize-none block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                            value={answer}
+                                            onChange={(e: React.ChangeEvent<any>) => setAnswer(e.target.value)}
+                                            onKeyDown={handleKeyDown}
                                         />
                                     </div>
                                 </div>
 
 
-                                <div className="mt-10">
-                                    <button
-                                        className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={handleEmailSubmission}
-                                    >
-                                        Connect & Receive survey in mail!
-                                    </button>
+                                    <div className="relative py-4 justify-self-end pb-24">
+                                        <button
+                                            type="submit"
+                                            className="w-28 absolute right-0 justify-self-end rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            onClick={handleSubmit}
+                                        >
+                                            Submit
+                                        </button>
+                                    </div></>) :
+
+                                (state == null || state?.length == 0) && (showGen) && ((showMail) ? (
+                                <div>
+                                    <div>
+                                        <label htmlFor="text_mail" className="block text-sm font-semibold leading-6 text-gray-900">
+                                            Email
+                                        </label>
+                                        <div className="mt-2.5">
+                                            <input
+                                                type="text"
+                                                name="text_mail"
+                                                id="text_mail"
+                                                required
+                                                autoComplete="email"
+                                                className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                value={email}
+                                                onChange={(e: React.ChangeEvent<any>) => setEmail(e.target.value)}
+                                                onKeyDown={(e) => ((e.key === "Enter") && handleEmailSubmission())}
+                                            />
+                                        </div>
+                                    </div>
+
+
+                                    <div className="mt-10">
+                                        <button
+                                            className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            onClick={handleEmailSubmission}
+                                        >
+                                            Connect & Receive survey in mail!
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            ) 
-                            :
-                            (
-                            <div>
-                                <div className="mt-10 pb-8">
-                                    <button
-                                        className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                        onClick={handleGenInfo}
-                                    >
-                                        Try AI generated Conversational Survey!
-                                    </button>
+                                ) 
+                                :
+                                (
+                                <div>
+                                    <div className="mt-10 pb-8">
+                                        <button
+                                            className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            onClick={handleGenInfo}
+                                        >
+                                            Try AI generated Conversational Survey!
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-                            )
-                        ))}
-                    </div>
+                                )
+                            ))}
                         </div>
+                    </div>
 
 
                     </div>
