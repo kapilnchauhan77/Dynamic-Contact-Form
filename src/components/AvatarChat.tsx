@@ -1,4 +1,6 @@
+import 'regenerator-runtime/runtime'
 import React, { useEffect, useState } from "react";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { postToAPI } from "./utils/postToAPI.ts";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
@@ -35,6 +37,28 @@ function AvatarChat() {
     const [surveyGoal, setSurveyGoal] = useState<string | undefined>("");
 
     const nav = useNavigate();
+
+    const [listen, setListen] = useState(false);
+    const [prevLengthOfTranscript, setPrevLengthOfTranscript] = useState(0);
+
+
+    let { transcript, browserSupportsSpeechRecognition } = useSpeechRecognition();
+
+
+    if (!browserSupportsSpeechRecognition) {
+        return null
+    }
+
+    useEffect(() => {
+            if (listen) {setAnswer(transcript.substr(prevLengthOfTranscript))}
+        }, [transcript])
+
+    const listenContinuously = () => {
+        setListen(true)
+        SpeechRecognition.startListening({
+        continuous: true,
+        language: 'en-GB'
+      }) }
 
     useEffect(() => {
         if (id) {
@@ -134,6 +158,7 @@ function AvatarChat() {
     }
 
     const handleSubmit = () => {
+        setPrevLengthOfTranscript(transcript.length);
         if (chatEnabled) {
             setLoading(true)
             if (id) {
@@ -223,6 +248,18 @@ function AvatarChat() {
                                         >
                                             Submit
                                         </button>
+                                    { (!listen) ? (
+                                    <button 
+                                        className="w-28 justify-self-end rounded-md bg-green-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
+                                        onClick={listenContinuously}>Start Listening</button>)
+                                    :
+                                    (<button
+                                        className="w-28 justify-self-end rounded-md bg-red-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                                        onClick={() => {
+                                            SpeechRecognition.stopListening;
+                                            setListen(false);
+                                            }}>Stop Listening</button>)}
+
                                     </div></>) :
 
                                 (state == null || state?.length == 0) && (showGen) && ((showMail) ? (

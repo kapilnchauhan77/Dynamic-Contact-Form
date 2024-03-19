@@ -18,6 +18,7 @@
     "react-dom": "^18.2.0",
     "react-player": "^2.14.1",
     "react-router-dom": "^6.21.2",
+    "react-speech-recognition": "^3.10.0",
     "redux": "^5.0.1",
     "tailwindcss": "^3.4.1",
     "vercel": "^33.2.0",
