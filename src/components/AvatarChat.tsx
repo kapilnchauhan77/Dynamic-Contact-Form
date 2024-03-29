@@ -165,7 +165,7 @@ function AvatarChat() {
                 postToAPI("uid/", {"uuid": uuid, "id": id, "uid": uid, "next_question": next_question , "insights_KPIs": [...insightsKPI, { "index": insightsKPI.length, "question": question, "answer": answer }], "impromtu_answer": answer, "insight_question": question }).then(data => {
                     console.log(data)
                     console.log(insightsKPI.length)
-                    if (insightsKPI.length > 1) {
+                    if (insightsKPI.length > 0) {
                         setChatEnabled(false);
                         if (uid){
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
