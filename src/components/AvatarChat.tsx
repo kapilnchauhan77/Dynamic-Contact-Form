@@ -12,6 +12,7 @@ function AvatarChat() {
     const forsta_uuid : string|null=  new URLSearchParams(search).get('fs_uuid');
     const forsta_sid : string|null=  new URLSearchParams(search).get('fs_surveyid');
     const uuid =  (forsta_uuid != null && forsta_uuid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('uuid');
+    uid =  (uid != null && uid?.length != 0) ? uid : (uuid == null) ? undefined : uuid;
     const sid =  (forsta_sid != null && forsta_sid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('sid');
     const state =  new URLSearchParams(search).get('return-url');
     let domain: string|null;
