@@ -11,11 +11,13 @@ function Navbar() {
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <Link to='/'>
+                      {/*
                       <img
                         className="h-16"
                         src={"/XPBrand.svg"}
                         alt="XPBrand.ai"
                       />
+                      */}
                       </Link>
                     </div>
                   </div>
