@@ -168,7 +168,7 @@ function AvatarChat() {
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 0) {
                         setChatEnabled(false);
-                        if (uid){
+                        if (uid!=uuid){
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
                         } else {
                             if (domain) {
