@@ -168,7 +168,7 @@ function AvatarChat() {
                     console.log(insightsKPI.length)
                     if (insightsKPI.length > 0) {
                         setChatEnabled(false);
-                        if (uid){
+                        if (uid!=uuid){
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
                         } else {
                             if (domain) {
@@ -252,14 +252,14 @@ function AvatarChat() {
                                     { (!listen) ? (
                                     <button 
                                         className="w-28 justify-self-end rounded-md bg-green-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-green-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-                                        onClick={listenContinuously}>Start Listening</button>)
+                                        onClick={listenContinuously}>Listen</button>)
                                     :
                                     (<button
                                         className="w-28 justify-self-end rounded-md bg-red-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
                                         onClick={() => {
                                             SpeechRecognition.stopListening;
                                             setListen(false);
-                                            }}>Stop Listening</button>)}
+                                            }}>Stop</button>)}
 
                                     </div></>) :
 
