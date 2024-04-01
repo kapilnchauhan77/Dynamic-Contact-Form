@@ -174,7 +174,7 @@ function AvatarChat() {
                             if (domain) {
                                 window.location.replace(domain);
                                 }
-                            setQuestion((state == null || state?.length == 0) ? ("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") : ("Please wait while we redirect you to the remaining survery")) 
+                            setQuestion((state == null || state?.length == 0) ? ("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") : ("")) 
                                 }
                     } else {
                         setQuestion(data[1])
