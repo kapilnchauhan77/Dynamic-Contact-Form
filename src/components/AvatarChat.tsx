@@ -15,6 +15,9 @@ function AvatarChat() {
     uid =  (uid != null && uid?.length != 0) ? uid : (uuid == null) ? undefined : uuid;
     const sid =  (forsta_sid != null && forsta_sid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('sid');
     const state =  new URLSearchParams(search).get('return-url');
+    let que =  new URLSearchParams(search).get('que');
+    que = (que != null && que?.length != 0) ? JSON.parse(que) : [""]
+    uid += (que != null && que?.length != 0) ? que[que?.length-1] : ""
     let domain: string|null;
     if (state?.length != 0){
         domain = state;
