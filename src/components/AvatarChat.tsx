@@ -16,7 +16,6 @@ function AvatarChat() {
     const sid =  (forsta_sid != null && forsta_sid?.length != 0) ? forsta_uuid : new URLSearchParams(search).get('sid');
     const state =  new URLSearchParams(search).get('return-url');
     let que =  new URLSearchParams(search).get('que');
-    uid += (que != null && que?.length != 0) ? " " + que : ""
     let domain: string|null;
     if (state?.length != 0){
         domain = state;
@@ -174,6 +173,7 @@ function AvatarChat() {
                             setQuestion("Thank you for your feedback, we will reach out to you shortly!") 
                         } else {
                             if (domain) {
+                                uid += (que != null && que?.length != 0) ? " " + que : ""
                                 window.location.replace(domain);
                                 }
                             setQuestion((state == null || state?.length == 0) ? ("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") : ("")) 
