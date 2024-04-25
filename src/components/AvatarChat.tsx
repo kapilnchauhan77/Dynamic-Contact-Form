@@ -176,6 +176,8 @@ function AvatarChat() {
                                 window.location.replace(domain);
                                 }
                             setQuestion((state == null || state?.length == 0) ? ("Like what you witnessed? Enter your mail below to connect with us as well as receive a link to your trial survey!") : ("")) 
+                            setShowGen(true)
+                            setShowMail(true)
                                 }
                     } else {
                         setQuestion(data[1])
