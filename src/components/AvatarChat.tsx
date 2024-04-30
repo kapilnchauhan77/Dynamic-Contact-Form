@@ -216,13 +216,13 @@ function AvatarChat() {
                 <div className="sm:mx-auto w-full">
 
                     <div className="flex w-full align-center justify-center overflow-hidden">
-                        {(state == null || state?.length == 0) && (<img  src={"/img.jpg"} width={"100%"} className="overflow-hidden" />)}
+                        {(state == null || state?.length == 0) && (<img  src={"/img.jpg"} width={"100%"} className="overflow-hidden myVideo" />)}
                         <div className={(state == null || state?.length == 0) ? ("absolute top-1/2 px-20 bg-white/70") : ("absolute top-[20%] px-20 bg-white/70")}>
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             {question}
                         </h2>
 
-                        <div className="mt-5 mx-auto w-full max-w-5xl justify-center">
+                        <div className="mt-5 mx-auto w-full max-w-5xl justify-center ">
 
                             {loading ? loadingComponent : 
                             (chatEnabled ?
@@ -245,7 +245,9 @@ function AvatarChat() {
                                     <div className="relative py-4 justify-self-end pb-24">
                                         <button
                                             type="submit"
-                                            className="w-28 absolute right-0 justify-self-end rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                            className="w-28 absolute right-0 justify-self-end rounded-md bg-indigo-600 px-2 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600
+                                            submit-btn
+                                            "
                                             onClick={handleSubmit}
                                         >
                                             Submit
